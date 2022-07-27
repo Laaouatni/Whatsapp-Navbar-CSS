@@ -1,0 +1,107 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap");
+
+:root {
+	--nav-height: 3rem;
+	--nav-width: 100%;
+	--bg-color: rgb(0, 128, 105);
+	--text-color: white;
+	--anim-speed: 0.5s;
+
+	--total-nav-items: 0;
+	--active-index: 0;
+
+	color-scheme: light dark;
+	scroll-behavior: smooth;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+	font-family: poppins;
+	overflow: hidden;
+}
+
+header {
+	display: flex;
+	align-items: center;
+	padding: 0 1rem;
+	user-select: none;
+	justify-content: space-between;
+	color: white;
+}
+
+#header-icons {
+	display: flex;
+	gap: 1rem;
+}
+
+header,
+nav {
+	width: var(--nav-width);
+	height: var(--nav-height);
+	background-color: var(--bg-color);
+	z-index: 1;
+}
+
+nav {
+	display: flex;
+	text-transform: uppercase;
+	color: var(--text-color);
+	position: sticky;
+	top: 0;
+}
+
+nav::before {
+	--indicator-width: calc(var(--nav-width) / var(--total-nav-items));
+	content: "";
+	position: absolute;
+	bottom: 0;
+	left: calc(var(--active-index) * var(--indicator-width));
+	background-color: var(--text-color);
+	height: 0.2rem;
+	width: var(--indicator-width);
+	transition: left var(--anim-speed);
+	box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.3);
+}
+
+.nav-item {
+	flex: 1;
+	display: grid;
+	place-items: center;
+	user-select: none;
+	opacity: 0.5;
+	transition: opacity var(--anim-speed);
+}
+
+.nav-item:active {
+	background-color: rgba(255, 255, 255, 0.3);
+}
+
+.nav-item.active {
+	opacity: 1;
+}
+
+#container {
+	position: relative;
+	display: grid;
+	grid-auto-flow: column;
+	grid-auto-columns: var(--nav-width);
+	left: calc(-1 * (var(--active-index) * var(--nav-width)));
+	transition: left var(--anim-speed);
+}
+
+#container>* {
+	padding: 0 1rem;
+	height: min-content;
+	min-height: calc(100vh - (var(--nav-height) * 2));
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--bg-color: rgb(31, 44, 52);
+		--text-color: rgb(8, 164, 128);
+	}
+}
