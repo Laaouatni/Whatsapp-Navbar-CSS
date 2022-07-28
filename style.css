@@ -22,7 +22,7 @@ body {
 	margin: 0;
 	font-family: poppins;
 	overflow: hidden;
-        position: relative;
+        /* position: relative; */ 
 }
 
 header {
